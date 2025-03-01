@@ -73,11 +73,11 @@ chmod +x ./apache_exporter-0.11.0.linux-amd64/apache_exporter
 
 
 #Deploy MySQL COntainer
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD= mysql
 #Go inside container and run SQL statement to create a MySQL user.
 docker exec -it mysql bash
 mysql -u root -p
-CREATE USER 'exporter'@'localhost' IDENTIFIED BY 'password' WITH MAX_USER_CONNECTIONS 3; 
+CREATE USER 'exporter'@'localhost' IDENTIFIED BY '' WITH MAX_USER_CONNECTIONS 3; 
 GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'localhost'; 
 quit; 
 exit 
@@ -115,11 +115,11 @@ sudo systemctl status mysqld_exporter
 
 
 #Deploy MySQL COntainer
-docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password mysql
+docker run -d --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD= mysql
 #Go inside container and run SQL statement to create a MySQL user.
 docker exec -it mysql bash
 mysql -u root -p
-CREATE USER 'exporter'@'localhost' IDENTIFIED BY 'password' WITH MAX_USER_CONNECTIONS 3; 
+CREATE USER 'exporter'@'localhost' IDENTIFIED BY '' WITH MAX_USER_CONNECTIONS 3; 
 GRANT PROCESS, REPLICATION CLIENT, SELECT ON *.* TO 'exporter'@'localhost'; 
 quit; 
 exit 
@@ -142,7 +142,7 @@ nano /etc/.mysqld_exporter.cnf
 
 [client]
 user=exporter
-password=password
+password=
 host=localhost
 
 sudo nano /etc/systemd/system/mysqld_exporter.service
